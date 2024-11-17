@@ -9,12 +9,10 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     Get.put(BottomNavController());
 
     return GetMaterialApp(
       title: 'Bottom Navigation Demo',
-      // initialRoute: '/home',
       getPages: RouteService.getPages,
     );
   }
