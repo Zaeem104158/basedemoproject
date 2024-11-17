@@ -1,3 +1,4 @@
+import 'package:baseproj/route/route_path.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,13 +20,13 @@ class BottomNavBar extends StatelessWidget {
           // Navigate based on index
           switch (index) {
             case 0:
-              Get.offAllNamed('/home');
+              Get.offAllNamed(RoutePath.home);
               break;
             case 1:
-              Get.offAllNamed('/notifications');
+              Get.offAllNamed(RoutePath.notification);
               break;
             case 2:
-              Get.offAllNamed('/settings');
+              Get.offAllNamed(RoutePath.setting);
               break;
           }
         },
