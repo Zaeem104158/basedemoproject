@@ -9,6 +9,8 @@ class SettingsScreen extends GetView<SettingsController> {
   @override
   Widget build(BuildContext context) {
     return const ScaffoldWithBottomBar(
-        showDrawer: true, child: Center(child: Text('Setting Screen')));
+        appbarTitle: "Settings",
+        showDrawer: true,
+        child: Center(child: Text('Setting Screen')));
   }
 }

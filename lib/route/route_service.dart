@@ -3,6 +3,7 @@ import 'package:baseproj/app/notification/binding/notification_binding.dart';
 import 'package:baseproj/app/setting/binding/setting_binding.dart';
 import 'package:baseproj/app/splash/binding/splash_binding.dart';
 import 'package:baseproj/app/splash/screen/splash_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../app/home/screen/home_screen.dart';
 import '../app/notification/screen/notification_screen.dart';
