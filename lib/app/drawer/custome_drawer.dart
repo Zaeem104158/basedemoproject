@@ -68,7 +68,7 @@ class CustomeDrawerWidget extends StatelessWidget {
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3, // 3 items per row
                   mainAxisSpacing: 16, // Vertical spacing
-                  crossAxisSpacing: 16, // Horizontal spacing
+                  crossAxisSpacing: 5, // Horizontal spacing
                   childAspectRatio: 0.8, // Adjust the ratio of width to height
                 ),
                 itemBuilder: (context, index) {
@@ -95,11 +95,13 @@ class CustomeDrawerWidget extends StatelessWidget {
               width: 50,
             )),
         const SizedBox(height: 8),
-        CustomeText(
-            text: item.label,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: Colors.white),
+        FittedBox(
+          child: CustomeText(
+              text: item.label,
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.white),
+        ),
       ],
     );
   }

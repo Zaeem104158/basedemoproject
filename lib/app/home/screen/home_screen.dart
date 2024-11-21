@@ -1,5 +1,6 @@
 import 'package:baseproj/app/home/controller/home_controller.dart';
 import 'package:baseproj/core/color/app_colors.dart';
+import 'package:baseproj/route/route_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -13,7 +14,7 @@ class HomeScreen extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldWithBottomBar(
+    return ScaffoldWithAppAndBottomBar(
         showDrawer: true,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -49,7 +50,8 @@ class HomeScreen extends GetView<HomeController> {
                 ],
               ),
             ),
-            Expanded(
+            SizedBox(
+              height: 150,
               child: ListView.builder(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -57,47 +59,43 @@ class HomeScreen extends GetView<HomeController> {
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
                   List<Color> noticeColors = <Color>[
-                    Color(0xFFd4ffea),
-                    Color(0xFFffd4d4),
-                    Color(0xFFd4f5ff)
+                    const Color(0xFFd4ffea),
+                    const Color(0xFFffd4d4),
+                    const Color(0xFFd4f5ff)
                   ];
                   return Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 16),
-                    height: 150,
+                    margin: const EdgeInsets.only(right: 16),
+                    padding: const EdgeInsets.all(12),
                     width: 200,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: noticeColors[index % noticeColors.length],
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(8.0, 2, 8, 2),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          ClipRRect(
-                            borderRadius:
-                                BorderRadius.circular(20), // Image border
-                            child: SizedBox.fromSize(
-                              size: const Size.fromRadius(35), // Image radius
-                              child: Image.asset(ImagePath.academicYear,
-                                  fit: BoxFit.cover),
-                            ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          child: SizedBox.fromSize(
+                            size: const Size.fromRadius(20), // Image radius
+                            child: Image.asset(ImagePath.academicYear,
+                                fit: BoxFit.cover),
                           ),
-                          SizedBox(
-                            height: 2,
-                          ),
-                          CustomeText(
-                            text: "School is going for vacation in next month",
-                            fontWeight: FontWeight.w400,
-                          ),
-                          CustomeText(
-                            text: "02 March, 2024",
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w400,
-                          )
-                        ],
-                      ),
+                        ),
+                        const SizedBox(
+                          height: 2,
+                        ),
+                        const CustomeText(
+                          text: "School is going for vacation in next month",
+                          fontWeight: FontWeight.w400,
+                          maxLines: 2,
+                        ),
+                        const CustomeText(
+                          text: "02 March, 2024",
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w400,
+                        )
+                      ],
                     ),
                   );
                 },
@@ -105,20 +103,34 @@ class HomeScreen extends GetView<HomeController> {
               ),
             ),
             Expanded(
-              flex: 2,
+              // flex: 2,
               child: SlideTransition(
                 position: controller.animation,
                 child: GridView.builder(
-                  padding: const EdgeInsets.only(left: 16.0, right: 16, top: 24),
+                  padding:
+                      const EdgeInsets.only(left: 16.0, right: 16, top: 24),
                   itemCount: items.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3, // 3 items per row
                     mainAxisSpacing: 16, // Vertical spacing
-                    crossAxisSpacing: 16, // Horizontal spacing
-                    childAspectRatio: 0.8, // Adjust the ratio of width to height
+                    crossAxisSpacing: 5, // Horizontal spacing
+                    childAspectRatio:
+                        0.8, // Adjust the ratio of width to height
                   ),
                   itemBuilder: (context, index) {
-                    return _buildGridItem(items[index]);
+                    return GestureDetector(
+                        onTap: () {
+                          switch (items[index].label.toLowerCase()) {
+                            case "calendar":
+                              {
+                                Get.toNamed(
+                                  RoutePath.calendar,
+                                );
+                              }
+                            default:
+                          }
+                        },
+                        child: _buildGridItem(items[index]));
                   },
                 ),
               ),
@@ -140,11 +152,13 @@ class HomeScreen extends GetView<HomeController> {
               width: 50,
             )),
         const SizedBox(height: 8),
-        CustomeText(
-            text: item.label,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: Colors.black),
+        FittedBox(
+          child: CustomeText(
+              text: item.label,
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.black),
+        ),
       ],
     );
   }

@@ -11,6 +11,7 @@ class CustomeText extends StatelessWidget {
   final FontStyle fontStyle;
   final int? maxLines;
   final TextDecoration? decoration;
+  final TextOverflow? overflow;
 
   const CustomeText({
     super.key,
@@ -24,6 +25,7 @@ class CustomeText extends StatelessWidget {
     this.softWrap = true,
     this.fontStyle = FontStyle.normal,
     this.maxLines,
+    this.overflow,
   });
 
   @override
@@ -37,6 +39,7 @@ class CustomeText extends StatelessWidget {
           fontStyle: fontStyle,
           decoration: decoration),
       textDirection: textDirection,
+      overflow: overflow ?? TextOverflow.ellipsis,
       textAlign: textAlign,
       maxLines: maxLines,
       softWrap: softWrap,

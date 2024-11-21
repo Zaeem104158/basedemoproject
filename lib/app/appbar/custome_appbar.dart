@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
+import 'package:get/get.dart';
 import '../../core/utility/image_path.dart';
 
 class CustomClipperAppBar extends CustomClipper<Path> {
@@ -27,11 +27,15 @@ class CustomClipperAppBar extends CustomClipper<Path> {
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final bool onBack;
+  final String? onBackRoute;
   final Color backgroundColor;
   final List<Widget>? actions;
   const CustomAppBar(
       {super.key,
       required this.title,
+      this.onBackRoute,
+      this.onBack = false,
       required this.backgroundColor,
       this.actions});
   @override
@@ -65,16 +69,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               alignment: Alignment.center, // Position at bottom-left
               child: Padding(
                 padding: const EdgeInsets.only(
-                    left: 24.0, bottom: 24.0), // Add padding for placement
+                    left: 8.0, bottom: 0.0), // Add padding for placement
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     // Drawer Icon
                     Builder(
                       builder: (context) => IconButton(
-                        icon: const Icon(Icons.grid_view_rounded,
+                        icon: Icon(
+                            !onBack
+                                ? Icons.grid_view_rounded
+                                : Icons.arrow_back_ios_new,
                             color: Colors.white),
-                        onPressed: () => Scaffold.of(context).openDrawer(),
+                        onPressed: () => !onBack
+                            ? Scaffold.of(context).openDrawer()
+                            : Get.back(),
                       ),
                     ),
                     // Title

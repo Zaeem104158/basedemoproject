@@ -1,3 +1,4 @@
+import 'package:device_preview_plus/device_preview_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +15,9 @@ class App extends StatelessWidget {
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       title: 'Syntex Sonata',
       getPages: RouteService.getPages,
       theme: ThemeData(
