@@ -1,12 +1,13 @@
+import 'dart:developer';
 import 'package:baseproj/app/home/controller/home_controller.dart';
 import 'package:baseproj/core/color/app_colors.dart';
 import 'package:baseproj/route/route_path.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../../common_widget/custome_text.dart';
 import '../../../common_widget/scaffold_appandbottomnavbar.dart';
 import '../../../core/utility/image_path.dart';
+import '../../bottom_navbar.dart/controller/bottom_navbar_controller.dart';
 import '../../drawer/custome_drawer.dart';
 
 class HomeScreen extends GetView<HomeController> {
@@ -16,6 +17,7 @@ class HomeScreen extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return ScaffoldWithAppAndBottomBar(
         showDrawer: true,
+        //onBackRoute: controller.previousRoute.value,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -123,9 +125,11 @@ class HomeScreen extends GetView<HomeController> {
                           switch (items[index].label.toLowerCase()) {
                             case "calendar":
                               {
-                                Get.toNamed(
-                                  RoutePath.calendar,
-                                );
+                                Get.toNamed(RoutePath.calendar);
+                              }
+                            case 'fee details':
+                              {
+                                Get.toNamed(RoutePath.feeDetails);
                               }
                             default:
                           }

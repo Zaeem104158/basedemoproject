@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:baseproj/route/route_path.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -41,21 +43,18 @@ class BottomNavBar extends GetView<BottomNavController> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   _buildBottomNavItem(
-                    icon: Icons.home,
-                    label: 'Home',
-                    isSelected: controller.selectedIndex.value == 0,
-                    onTap: () {
-                      controller.changeIndex(0);
-                      Get.toNamed(RoutePath.home);
-                    },
-                  ),
+                      icon: Icons.home,
+                      label: 'Home',
+                      isSelected: controller.selectedIndex.value == 0,
+                      onTap: () {
+                        controller.changeIndex(0);
+                      }),
                   _buildBottomNavItem(
                     icon: Icons.notifications,
                     label: 'Notifications',
                     isSelected: controller.selectedIndex.value == 1,
                     onTap: () {
                       controller.changeIndex(1);
-                      Get.toNamed(RoutePath.notification);
                     },
                   ),
                   _buildBottomNavItem(
@@ -64,7 +63,6 @@ class BottomNavBar extends GetView<BottomNavController> {
                     isSelected: controller.selectedIndex.value == 2,
                     onTap: () {
                       controller.changeIndex(2);
-                      Get.toNamed(RoutePath.setting);
                     },
                   ),
                 ],

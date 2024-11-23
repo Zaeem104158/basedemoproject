@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:baseproj/app/bottom_drawer/controller/bottom_drawer_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,6 +16,7 @@ class BottomDrawer extends GetView<BottomDrawerController> {
     return ScaffoldWithAppAndBottomBar(
       appbarTitle: "Drawer",
       showDrawer: true,
+      //onBackRoute: controller.previousRoute.value,
       child: SlideTransition(
         position: controller.animation,
         child: GridView.builder(

@@ -5,10 +5,14 @@ class BottomDrawerController extends GetxController
     with GetSingleTickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<Offset> animation;
+  RxString previousRoute = "".obs;
   @override
   void onInit() {
     super.onInit();
-
+    var data = Get.arguments;
+    if (data != null) {
+      previousRoute.value = data[0];
+    }
     // Initialize animation controller
     animationController = AnimationController(
       duration: const Duration(milliseconds: 1200),
