@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -84,7 +82,6 @@ class FeeDetailsWidget extends StatelessWidget {
                   leading: Checkbox(
                     value: controller.selectedFees.contains(index),
                     onChanged: (value) {
-                      // Automatically toggle all sub-items for the fee
                       fee.forEach((key, val) {
                         if (val is Map && val['status'] != 'Paid') {
                           controller.toggleFeeSelection(

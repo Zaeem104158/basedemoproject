@@ -1,9 +1,9 @@
 import 'package:baseproj/app/bottom_navbar.dart/controller/bottom_navbar_controller.dart';
 import 'package:get/get.dart';
 
-class BottomNavbarBinding implements Bindings {
+class BottomNavbarBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(BottomNavController());
+    Get.lazyPut<BottomNavController>(() => BottomNavController());
   }
 }

@@ -10,6 +10,7 @@ class NotificationScreen extends GetView<NotificationController> {
   Widget build(BuildContext context) {
     return const ScaffoldWithAppAndBottomBar(
       appbarTitle: "Notifications",
+      bottombarIndex: 1,
       showDrawer: true,
       //onBackRoute: controller.previousRoute.value,
       child: Center(

@@ -1,25 +1,26 @@
-import 'dart:developer';
-
-import 'package:baseproj/app/bottom_navbar.dart/controller/bottom_navbar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../app/appbar/custome_appbar.dart';
 import '../app/bottom_navbar.dart/widget/bottom_navbar_widget.dart';
 import '../app/drawer/custome_drawer.dart';
-import '../route/route_path.dart';
+import '../core/route/route_path.dart';
 
 class ScaffoldWithAppAndBottomBar extends StatelessWidget {
   final Widget child;
   final String appbarTitle;
   final bool showDrawer;
   final Widget? floatingActionButton;
+  final int? bottombarIndex;
+  final List<Widget>? actions;
 
   const ScaffoldWithAppAndBottomBar({
     super.key,
     required this.child,
     this.appbarTitle = "Home",
     this.showDrawer = false,
+    this.bottombarIndex = 0,
     this.floatingActionButton,
+    this.actions,
   });
 
   @override
@@ -32,7 +33,7 @@ class ScaffoldWithAppAndBottomBar extends StatelessWidget {
         } else {
           if (Get.currentRoute == RoutePath.home ||
               Get.currentRoute == RoutePath.notification ||
-              Get.currentRoute == RoutePath.setting) {
+              Get.currentRoute == RoutePath.bottomDrawer) {
             // Show exit dialog only if on the home screen
             await _showExitDialog(context);
           } else {
@@ -43,13 +44,14 @@ class ScaffoldWithAppAndBottomBar extends StatelessWidget {
       child: Scaffold(
         floatingActionButton: floatingActionButton,
         appBar: CustomAppBar(
+          actions: actions,
           onBack: !showDrawer,
           title: appbarTitle,
           backgroundColor: Colors.transparent,
         ),
         drawer: showDrawer ? const CustomeDrawerWidget() : null,
         body: child,
-        bottomNavigationBar: const BottomNavBar(),
+        bottomNavigationBar: BottomNavBar(index: bottombarIndex),
       ),
     );
   }

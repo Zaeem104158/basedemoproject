@@ -2,44 +2,50 @@ import 'package:flutter/material.dart';
 
 class CustomeText extends StatelessWidget {
   final String text;
-  final FontWeight fontWeight;
-  final double fontSize;
-  final Color color;
+  final FontWeight? fontWeight;
+  final double? fontSize;
+  final Color? color;
   final TextDirection textDirection;
   final TextAlign textAlign;
   final bool softWrap;
-  final FontStyle fontStyle;
+  final FontStyle? fontStyle;
   final int? maxLines;
   final TextDecoration? decoration;
-  final TextOverflow? overflow;
+  final TextStyle? style; // Directly accept a TextStyle
 
   const CustomeText({
     super.key,
     required this.text,
-    this.fontWeight = FontWeight.normal,
-    this.fontSize = 14.0,
-    this.color = Colors.black,
+    this.fontWeight,
+    this.fontSize,
+    this.color,
     this.textDirection = TextDirection.ltr,
     this.decoration,
     this.textAlign = TextAlign.left,
     this.softWrap = true,
-    this.fontStyle = FontStyle.normal,
+    this.fontStyle,
     this.maxLines,
-    this.overflow,
+    this.style, // Accepts custom text style
   });
 
   @override
   Widget build(BuildContext context) {
+    // If style is provided, use it; otherwise, use the theme style
+    final TextStyle? themeStyle = style ??
+        Theme.of(context)
+            .textTheme
+            .bodyMedium; // Default to bodyMedium if not provided
+
     return Text(
       text,
-      style: TextStyle(
-          fontWeight: fontWeight,
-          fontSize: fontSize,
-          color: color,
-          fontStyle: fontStyle,
-          decoration: decoration),
+      style: themeStyle?.copyWith(
+        fontWeight: fontWeight ?? themeStyle.fontWeight,
+        fontSize: fontSize ?? themeStyle.fontSize,
+        color: color ?? themeStyle.color,
+        fontStyle: fontStyle ?? themeStyle.fontStyle,
+        decoration: decoration ?? themeStyle.decoration,
+      ),
       textDirection: textDirection,
-      overflow: overflow ?? TextOverflow.ellipsis,
       textAlign: textAlign,
       maxLines: maxLines,
       softWrap: softWrap,

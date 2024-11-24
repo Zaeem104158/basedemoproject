@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:no_screenshot/no_screenshot.dart';
 import '../../../core/utility/date_time.dart';
 import '../controller/calendar_controller.dart';
 

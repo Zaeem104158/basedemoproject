@@ -1,30 +1,26 @@
-import 'package:device_preview_plus/device_preview_plus.dart';
+import 'package:baseproj/core/theme/binding/theme_binding.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import '../route/route_service.dart';
-import 'bottom_navbar.dart/controller/bottom_navbar_controller.dart';
+import '../core/route/route_service.dart';
+import '../core/theme/dark_theme/dark_theme.dart';
+import '../core/theme/light_theme/light_theme.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Get.put(BottomNavController());
-
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       // useInheritedMediaQuery: true,
       // locale: DevicePreview.locale(context),
       // builder: DevicePreview.appBuilder,
       title: 'Syntex Sonata',
+      initialBinding: ThemeBinding(),
       getPages: RouteService.getPages,
-      theme: ThemeData(
-        textTheme: GoogleFonts.montserratTextTheme(
-          Theme.of(context).textTheme,
-        ),
-      ),
+      theme: lightTheme, // Default light theme
+      darkTheme: darkTheme, // Dark theme
+      themeMode: ThemeMode.system,
     );
   }
 }

@@ -1,6 +1,9 @@
 class ImagePath {
   static const String imagePath = "assets/images";
   static const String appbarLogo = "$imagePath/appbar_logo1.svg";
+  static const String onboardingImage1 = "$imagePath/welcome.jpg";
+  static const String onboardingImage2 = "$imagePath/lms1.png";
+  static const String onboardingImage3 = "$imagePath/lms2.png";
   static const String attendance = "$imagePath/attendance.png";
   static const String calender = "$imagePath/calender.png";
   static const String exam = "$imagePath/exam.png";
@@ -10,5 +13,4 @@ class ImagePath {
   static const String noticeboard = "$imagePath/noticeboard.png";
   static const String reportCard = "$imagePath/report-card.png";
   static const String academicYear = "$imagePath/academic-year.png";
-
 }

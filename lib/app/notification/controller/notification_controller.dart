@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:get/get.dart';
 
 class NotificationController extends GetxController {
@@ -8,7 +7,7 @@ class NotificationController extends GetxController {
   void onInit() {
     var data = Get.arguments;
     if (data != null) {
-      previousRoute.value = data[0];
+      previousRoute.value = data;
       log("message--- $previousRoute");
     }
     super.onInit();

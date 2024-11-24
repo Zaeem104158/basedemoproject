@@ -1,11 +1,9 @@
-import 'dart:developer';
-
 import 'package:baseproj/app/bottom_drawer/controller/bottom_drawer_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../common_widget/custome_text.dart';
 import '../../../common_widget/scaffold_appandbottomnavbar.dart';
-import '../../../route/route_path.dart';
+import '../../../core/route/route_path.dart';
 import '../../drawer/custome_drawer.dart';
 
 class BottomDrawer extends GetView<BottomDrawerController> {
@@ -16,6 +14,7 @@ class BottomDrawer extends GetView<BottomDrawerController> {
     return ScaffoldWithAppAndBottomBar(
       appbarTitle: "Drawer",
       showDrawer: true,
+      bottombarIndex: 2,
       //onBackRoute: controller.previousRoute.value,
       child: SlideTransition(
         position: controller.animation,

@@ -4,7 +4,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path_provider/path_provider.dart';
-import 'utility/app_platforms.dart';
+import '../utility/app_platforms.dart';
 
 enum Url {
   testing('http://software.abairtechsolution.com:1400/ords/mobile/pic'),

@@ -7,6 +7,11 @@ class SplashScreen extends GetView<SplashController> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: Text("Splash Screen"),),);
+    return const Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: Text("Splash Screen"),
+      ),
+    );
   }
 }

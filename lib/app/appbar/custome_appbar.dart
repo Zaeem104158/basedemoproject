@@ -1,6 +1,8 @@
+import 'package:baseproj/common_widget/custome_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import '../../core/color/app_colors.dart';
 import '../../core/utility/image_path.dart';
 
 class CustomClipperAppBar extends CustomClipper<Path> {
@@ -40,19 +42,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.actions});
   @override
   Widget build(BuildContext context) {
+    // Retrieve dynamic colors from the theme
+    final primaryColor = Theme.of(context).appBarTheme.backgroundColor;
+    final onPrimaryColor = Theme.of(context).colorScheme.onPrimary;
+    final backgroundColor = Theme.of(context).colorScheme.surface;
     return ClipPath(
       clipper: CustomClipperAppBar(),
       child: AppBar(
         automaticallyImplyLeading: false,
-        // title: Text(title),
-        // backgroundColor: backgroundColor,
-        actions: actions,
         flexibleSpace: Stack(
           children: [
             // Gradient Background
             Container(
-              decoration: const BoxDecoration(
-                color: Color(0xFF473f97),
+              decoration: BoxDecoration(
+                color: primaryColor,
               ),
               // child: SvgPicture.asset(ImagePath.imagePath),
             ),
@@ -61,7 +64,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: SvgPicture.asset(
                 ImagePath.appbarLogo,
                 height: 90,
-                color: Colors.grey.shade50.withOpacity(0.1),
+                color: onPrimaryColor.withOpacity(0.1).withOpacity(0.1),
               ),
             ),
             // Drawer Icon and Title at Bottom
@@ -80,26 +83,30 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                             !onBack
                                 ? Icons.grid_view_rounded
                                 : Icons.arrow_back_ios_new,
-                            color: Colors.white),
+                            color: onPrimaryColor),
                         onPressed: () => !onBack
                             ? Scaffold.of(context).openDrawer()
                             : Get.back(),
                       ),
                     ),
                     // Title
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    CustomeText(
+                      text: title,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineMedium
+                          ?.copyWith(color: AppColors.whiteColor),
                     ),
                     const Spacer(),
-                    const Padding(
-                      padding: EdgeInsets.only(right: 16.0),
-                      child: CircleAvatar(),
-                    ),
+                    if (actions == null)
+                      Padding(
+                        padding: const EdgeInsets.only(right: 16.0),
+                        child: CircleAvatar(
+                          radius: 35,
+                          backgroundColor: backgroundColor,
+                        ),
+                      ),
+                    if (actions != null) ...actions!
                   ],
                 ),
               ),
