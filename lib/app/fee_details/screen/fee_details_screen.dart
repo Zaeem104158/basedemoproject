@@ -1,7 +1,9 @@
+import 'package:baseproj/common_widget/custome_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common_widget/scaffold_appandbottomnavbar.dart';
+import '../../../core/color/app_colors.dart';
 import '../controller/fee_details_controller.dart';
 
 class FeeDetailsScreen extends GetView<FeeDetailsController> {
@@ -74,10 +76,34 @@ class FeeDetailsWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
             elevation: 4,
-            child: Obx(() => ExpansionTile(
+            child: Obx(() {
+              final submenuTotal = controller.submenuTotals[index] ?? 0;
+              return Theme(
+                data: Theme.of(context)
+                    .copyWith(dividerColor: Colors.transparent),
+                child: ExpansionTile(
+                  backgroundColor: Color(0xFFd4f5ff),
+                  collapsedBackgroundColor: Color(0xFFd4f5ff),
+                  iconColor: Color(0xFFff5959),
+                  collapsedIconColor: Color(0xFFff5959),
+                  collapsedShape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
                   tilePadding: const EdgeInsets.symmetric(
                     horizontal: 16,
                     vertical: 12,
+                  ),
+                  onExpansionChanged: (value) =>
+                      controller.setExpansion(index, value),
+                  trailing: Column(
+                    // mainAxisSize: MainAxisSize.max,
+                    children: [
+                      CustomeText(text: "${fee["date"]}"),
+                      Icon(controller.expansionState[index] == true
+                          ? Icons.keyboard_arrow_down_outlined
+                          : Icons.keyboard_arrow_up)
+                    ],
                   ),
                   leading: Checkbox(
                     value: controller.selectedFees.contains(index),
@@ -94,21 +120,44 @@ class FeeDetailsWidget extends StatelessWidget {
                       });
                     },
                   ),
-                  title: Text(
-                    'School Fee for ${fee['month']}',
-                    style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.w500),
+                  title: Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomeText(
+                          text: 'School Fee for ${fee['month']}',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        CustomeText(
+                          text: 'Payable Amount: ৳$submenuTotal',
+                          style: Theme.of(context).textTheme.labelLarge,
+                          // fontSize: 8,
+                        ),
+                        Chip(
+                          color: WidgetStatePropertyAll(Color(0xFF12b264)),
+                          label: CustomeText(
+                            text: "Paid",
+                            color: Colors.white,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: buildDetailRows(fee, index),
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Divider(
+                          color: Colors.grey,
+                        ),
+                        ...buildDetailRows(fee, index)
+                      ],
                     ),
                   ],
-                )),
+                ),
+              );
+            }),
           ),
         );
       },
@@ -126,34 +175,37 @@ class FeeDetailsWidget extends StatelessWidget {
       final isDisabled = section['status'] == 'Paid';
       final amount = section['amount'] ?? 0;
 
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Checkbox(
-                value: controller.isSubItemSelected(index, field),
-                onChanged: isDisabled
-                    ? null
-                    : (value) {
-                        controller.toggleFeeSelection(
-                          index,
-                          field,
-                          amount,
-                          value!,
-                        );
-                      },
-              ),
-              Text(
-                field.replaceFirst(field[0], field[0].toUpperCase()),
-              ),
-            ],
-          ),
-          Text(
-            isDisabled ? section['status'] : amount.toString(),
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ],
+      return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Checkbox(
+                  value: controller.isSubItemSelected(index, field),
+                  onChanged: isDisabled
+                      ? null
+                      : (value) {
+                          controller.toggleFeeSelection(
+                            index,
+                            field,
+                            amount,
+                            value!,
+                          );
+                        },
+                ),
+                Text(
+                  field.replaceFirst(field[0], field[0].toUpperCase()),
+                ),
+              ],
+            ),
+            Text(
+              isDisabled ? section['status'] : amount.toString(),
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
       );
     }).toList();
   }

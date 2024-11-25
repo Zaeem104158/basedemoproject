@@ -3,10 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../core/theme/controller/theme_controller.dart';
 
-class HomeController extends GetxController
-    with GetSingleTickerProviderStateMixin {
-  late AnimationController animationController;
-  late Animation<Offset> animation;
+class HomeController extends GetxController {
   RxString previousRoute = "".obs;
   late ThemeController themeController;
 
@@ -18,27 +15,10 @@ class HomeController extends GetxController
     if (data != null) {
       previousRoute.value = data[0];
     }
-    // Initialize animation controller
-    animationController = AnimationController(
-      duration: const Duration(milliseconds: 1200),
-      vsync: this,
-    );
-
-    // Define the animation (bottom to top)
-    animation = Tween<Offset>(
-      begin: const Offset(0, 1), // Start off-screen (below)
-      end: Offset.zero, // End at the original position
-    ).animate(
-      CurvedAnimation(parent: animationController, curve: Curves.easeOut),
-    );
-
-    // Start the animation
-    animationController.forward();
   }
 
   @override
   void onClose() {
-    animationController.dispose();
     super.onClose();
   }
 }

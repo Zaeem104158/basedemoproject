@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:baseproj/app/home/controller/home_controller.dart';
 import 'package:baseproj/core/color/app_colors.dart';
 import 'package:baseproj/core/route/route_path.dart';
@@ -114,8 +115,8 @@ class HomeScreen extends GetView<HomeController> {
             ),
             Expanded(
               // flex: 2,
-              child: SlideTransition(
-                position: controller.animation,
+              child: FadeInUp(
+                duration: const Duration(milliseconds: 1600),
                 child: GridView.builder(
                   padding:
                       const EdgeInsets.only(left: 16.0, right: 16, top: 24),
@@ -168,10 +169,9 @@ class HomeScreen extends GetView<HomeController> {
         const SizedBox(height: 8),
         FittedBox(
           child: CustomeText(
-              text: item.label,
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Colors.black),
+            text: item.label,
+            style: Theme.of(context).textTheme.labelSmall,
+          ),
         ),
       ],
     );

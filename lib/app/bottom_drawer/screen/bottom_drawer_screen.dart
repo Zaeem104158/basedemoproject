@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:baseproj/app/bottom_drawer/controller/bottom_drawer_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,8 +17,8 @@ class BottomDrawer extends GetView<BottomDrawerController> {
       showDrawer: true,
       bottombarIndex: 2,
       //onBackRoute: controller.previousRoute.value,
-      child: SlideTransition(
-        position: controller.animation,
+      child: FadeInUp(
+        duration: const Duration(milliseconds: 1600),
         child: GridView.builder(
           padding: const EdgeInsets.only(left: 16.0, right: 16, top: 24),
           itemCount: items.length,

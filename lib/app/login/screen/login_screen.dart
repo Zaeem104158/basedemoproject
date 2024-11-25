@@ -102,13 +102,16 @@ class LoginScreen extends GetView<LoginController> {
                                   Container(
                                     padding: const EdgeInsets.all(10),
                                     decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                color: Colors.grey.shade200))),
-                                    child: const TextField(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                            color: Colors.grey.shade200),
+                                      ),
+                                    ),
+                                    child: TextField(
+                                      controller: controller.usernameController,
                                       style: TextStyle(color: Colors.black),
                                       decoration: InputDecoration(
-                                          hintText: "Email or Phone number",
+                                          hintText: "Username",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -120,14 +123,16 @@ class LoginScreen extends GetView<LoginController> {
                                     //     border: Border(
                                     //         bottom: BorderSide(
                                     //             color: Colors.grey.shade200))),
-                                    child: const TextField(
+                                    child: TextField(
+                                      controller: controller.passwordController,
                                       obscureText: true,
                                       style: TextStyle(color: Colors.black),
                                       decoration: InputDecoration(
-                                          hintText: "Password",
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
-                                          border: InputBorder.none),
+                                        hintText: "Password",
+                                        hintStyle:
+                                            TextStyle(color: Colors.grey),
+                                        border: InputBorder.none,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -148,14 +153,17 @@ class LoginScreen extends GetView<LoginController> {
                         FadeInUp(
                             duration: const Duration(milliseconds: 1600),
                             child: ElevatedButton(
-                              onPressed: () => showTopSnackBar(
+                              onPressed: null,
+                              /* 
+                              showTopSnackBar(
                                 snackBarPosition: SnackBarPosition.bottom,
                                 Overlay.of(context),
-                                CustomSnackBar.success(
+                                const CustomSnackBar.success(
                                   message:
                                       "Good job, your release is successful. Have a nice day",
                                 ),
-                              ),
+                              )
+                              */
                               child: Center(
                                 child: CustomeText(
                                   text: "Login",

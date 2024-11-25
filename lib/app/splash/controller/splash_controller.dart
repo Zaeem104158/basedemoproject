@@ -17,7 +17,7 @@ class SplashController extends GetxController {
   }
 
   redirect() {
-    // Get.offAllNamed(RoutePath.login);
+    // Get.offAllNamed(RoutePath.home);
     if (onboardingSeen == true && loggedIn == true) {
       Get.offAllNamed(RoutePath.home);
     } else if (onboardingSeen == true && loggedIn == false) {

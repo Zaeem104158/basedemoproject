@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 
 class FeeDetailsController extends GetxController {
@@ -24,18 +26,35 @@ class FeeDetailsController extends GetxController {
 
   var selectedFees = <int>{}.obs;
   var selectedItemFees = <int, Set<String>>{}.obs;
+  var expansionState = <int, bool>{}.obs;
   var totalSelectedFee = 0.obs;
-
+  var submenuSelectedTotalFee = 0.obs;
+  var submenuTotals = <int, int>{}.obs;
   void toggleFeeSelection(
       int feeIndex, String type, int amount, bool isSelected) {
     selectedItemFees.putIfAbsent(feeIndex, () => <String>{});
 
     if (isSelected) {
       selectedItemFees[feeIndex]!.add(type);
+
+      // Update totalSelectedFee
       totalSelectedFee.value += amount;
+
+      // Update submenu total for the feeIndex
+      submenuTotals[feeIndex] = (submenuTotals[feeIndex] ?? 0) + amount;
     } else {
       selectedItemFees[feeIndex]!.remove(type);
+
+      // Update totalSelectedFee
       totalSelectedFee.value -= amount;
+
+      // Update submenu total for the feeIndex
+      submenuTotals[feeIndex] = (submenuTotals[feeIndex] ?? 0) - amount;
+
+      // Remove submenu total if it becomes zero
+      if (submenuTotals[feeIndex] == 0) {
+        submenuTotals.remove(feeIndex);
+      }
     }
 
     if (selectedItemFees[feeIndex]!.isEmpty) {
@@ -48,4 +67,36 @@ class FeeDetailsController extends GetxController {
   bool isSubItemSelected(int feeIndex, String type) {
     return selectedItemFees[feeIndex]?.contains(type) ?? false;
   }
+
+  void setExpansion(int index, bool value) {
+    expansionState[index] = value;
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* int calculateSubmenuTotal(int feeIndex) {
+    final fee = feeData[feeIndex];
+    int total = 0;
+
+    for (var key in ['totalFee', 'extraFee', 'lateCharges', 'discount']) {
+      final subItem = fee[key] as Map<String, dynamic>?;
+      if (subItem != null && subItem['amount'] != null) {
+        total += subItem['amount'] as int;
+      }
+    }
+
+    //submenuTotalFee.value = total;
+    return total;
+  }
+*/
