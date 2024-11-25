@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../common_widget/custome_dialogbox.dart';
+import '../../../common_widget/snackbar/custome_snackbar.dart';
+import '../../../common_widget/snackbar/top_snackbat.dart';
 
 class LoginScreen extends GetView<LoginController> {
   const LoginScreen({super.key});
@@ -146,7 +148,14 @@ class LoginScreen extends GetView<LoginController> {
                         FadeInUp(
                             duration: const Duration(milliseconds: 1600),
                             child: ElevatedButton(
-                              onPressed: () => showCustomDialog(),
+                              onPressed: () => showTopSnackBar(
+                                snackBarPosition: SnackBarPosition.bottom,
+                                Overlay.of(context),
+                                CustomSnackBar.success(
+                                  message:
+                                      "Good job, your release is successful. Have a nice day",
+                                ),
+                              ),
                               child: Center(
                                 child: CustomeText(
                                   text: "Login",
