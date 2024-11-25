@@ -33,7 +33,7 @@ class RouteService {
         binding: OnboardingBinding()),
     GetPage(
         name: RoutePath.login,
-        page: () => const LoginScreen(),
+        page: () => LoginScreen(),
         transition: Transition.noTransition,
         binding: LoginBinding()),
     GetPage(

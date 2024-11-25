@@ -5,6 +5,8 @@ import 'package:baseproj/core/color/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../common_widget/custome_dialogbox.dart';
+
 class LoginScreen extends GetView<LoginController> {
   const LoginScreen({super.key});
 
@@ -15,26 +17,26 @@ class LoginScreen extends GetView<LoginController> {
       resizeToAvoidBottomInset: true,
       body: Container(
         width: double.infinity,
-        decoration: const BoxDecoration(
-            // gradient: LinearGradient(
-            //   begin: Alignment.topCenter,
-            //   colors: Get.isDarkMode
-            //       ? [
-            //           AppColors.darkPrimaryColor,
-            //           AppColors.darkPrimaryColor.withOpacity(0.7),
-            //           AppColors.darkPrimaryColor.withOpacity(
-            //             0.3,
-            //           )
-            //         ]
-            //       : [
-            //           AppColors.primaryColor,
-            //           AppColors.primaryColor.withOpacity(0.7),
-            //           AppColors.primaryColor.withOpacity(
-            //             0.3,
-            //           )
-            //         ],
-            // ),
-            ),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            colors: Get.isDarkMode
+                ? [
+                    AppColors.darkPrimaryColor,
+                    AppColors.darkPrimaryColor.withOpacity(0.7),
+                    AppColors.darkPrimaryColor.withOpacity(
+                      0.3,
+                    )
+                  ]
+                : [
+                    AppColors.primaryColor,
+                    AppColors.primaryColor.withOpacity(0.7),
+                    AppColors.primaryColor.withOpacity(
+                      0.3,
+                    )
+                  ],
+          ),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -50,7 +52,10 @@ class LoginScreen extends GetView<LoginController> {
                     duration: const Duration(milliseconds: 1000),
                     child: CustomeText(
                       text: "Login",
-                      style: Theme.of(context).textTheme.displayMedium,
+                      style: Theme.of(context)
+                          .textTheme
+                          .displayMedium
+                          ?.copyWith(color: AppColors.whiteColor),
                     ),
                   ),
                   const SizedBox(
@@ -60,7 +65,10 @@ class LoginScreen extends GetView<LoginController> {
                     duration: const Duration(milliseconds: 1300),
                     child: CustomeText(
                         text: "Welcome Back",
-                        style: Theme.of(context).textTheme.displaySmall),
+                        style: Theme.of(context)
+                            .textTheme
+                            .displaySmall
+                            ?.copyWith(color: AppColors.whiteColor)),
                   ),
                 ],
               ),
@@ -138,10 +146,14 @@ class LoginScreen extends GetView<LoginController> {
                         FadeInUp(
                             duration: const Duration(milliseconds: 1600),
                             child: ElevatedButton(
-                              onPressed: () {},
-                              child: const Center(
+                              onPressed: () => showCustomDialog(),
+                              child: Center(
                                 child: CustomeText(
                                   text: "Login",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineSmall
+                                      ?.copyWith(color: AppColors.whiteColor),
                                 ),
                               ),
                             )),
@@ -154,6 +166,13 @@ class LoginScreen extends GetView<LoginController> {
           ],
         ),
       ),
+    );
+  }
+
+  void showCustomDialog() {
+    Get.dialog(
+      const Center(child: CustomeDialogBox()),
+      barrierDismissible: false,
     );
   }
 }

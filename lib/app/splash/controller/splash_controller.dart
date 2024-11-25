@@ -28,7 +28,6 @@ class SplashController extends GetxController {
   }
 
   Future<bool> checkOnboardingSeen() async {
-    log("---- ${appStorage.read(AppStorageKeys.hasSeenOnboarding)}");
     return await appStorage.read(AppStorageKeys.hasSeenOnboarding) ?? false;
   }
 
