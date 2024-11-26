@@ -62,9 +62,10 @@ class CustomeTextFormField extends StatelessWidget {
               fontWeight: FontWeight.normal),
       validator: isValidate
           ? (value) {
-              if (value == null || value == "") {
+              if (value == null || value.isEmpty) {
                 return validatorText;
               }
+              
               return null;
             }
           : null,

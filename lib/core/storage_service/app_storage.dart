@@ -42,5 +42,7 @@ class AppStorage {
 
 class AppStorageKeys {
   static const String hasSeenOnboarding = 'hasSeenOnboarding';
-  static const String loggedIn = 'hasLoggedIn';
+  static const String loginUserInfo = "loginUserInfo";
+  static const String rememberMe = "rememberMe";
+  static const String rememberedLoginData = 'rememberedLoginData';
 }

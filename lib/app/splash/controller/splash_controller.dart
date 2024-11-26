@@ -32,6 +32,10 @@ class SplashController extends GetxController {
   }
 
   Future<bool> checkLoggedIn() async {
-    return await appStorage.read(AppStorageKeys.loggedIn) ?? false;
+    return (await appStorage.read(AppStorageKeys.loginUserInfo)
+                as Map<String, dynamic>)
+            .isNotEmpty
+        ? true
+        : false;
   }
 }

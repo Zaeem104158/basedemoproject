@@ -134,7 +134,7 @@ class FeeDetailsWidget extends StatelessWidget {
                           style: Theme.of(context).textTheme.labelLarge,
                           // fontSize: 8,
                         ),
-                        Chip(
+                        const Chip(
                           color: WidgetStatePropertyAll(Color(0xFF12b264)),
                           label: CustomeText(
                             text: "Paid",

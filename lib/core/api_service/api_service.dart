@@ -6,16 +6,23 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:path_provider/path_provider.dart';
 import '../utility/app_platforms.dart';
 
-enum Url {
-  testing('http://software.abairtechsolution.com:1400/ords/mobile/pic'),
-  production("http://software.abairtechsolution.com:1400/ords/mobile/parent");
+enum ApiUrl {
+  testing(
+    'http://software.abairtechsolution.com:1400/ords/mobile/pic',
+  ),
+  auth(
+    "http://software.abairtechsolution.com:1400/ords/mobile/parent",
+  ),
+  production(
+    "http://software.abairtechsolution.com:1400/ords/mobile/lmsproject",
+  );
 
   final String url;
-  const Url(this.url);
+  const ApiUrl(this.url);
 }
 
 class ApiService {
-  final baseUrl = Url.production.url;
+  var baseUrl = ApiUrl.production.url;
   final Dio _dio = Dio();
   final String username = "api";
   final String password = "apitest";
